@@ -46,21 +46,7 @@ if (actions.includes(process.argv[2])){
             fs.unlink('./DL/siea.zip', () => {
                 request('https://operateurs.liain.fr/ipe/'+$(item).attr('href')).pipe(fs.createWriteStream('./DL/siea.zip')).on('close', async () => {
                     console.log('file written');
-                    /*const zip = new StreamZip({ file: './DL/siea.zip' });
-                    zip.on('ready', async () => {
-                        const entriesCount = zip.entriesCount;
-                        const entries = zip.entries();
-                        for (const entry of Object.values(entries)) {
-                            if (/LIAIN_01_SIEA_PM_IPEZMD_V20_\d{8}_00_PBOOK\.csv/.test(entry.name)) {
-                                const data = zip.entryDataSync(entry.name).toString('utf8');
-                                console.log(data);
-                                //readCSV(data);
-                            }   
-                        }
-                        await zip.close();
-    
-
-                    })*/
+             
                     extract('./DL/siea.zip', { dir: '/Users/simon/Documents/Dev/node/adopteUnPM/scripts/DL' }).then((x) => {
 
                         console.log(x);
